@@ -10,7 +10,7 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
-  let categorias = ["Comida", "Café", "Nocturna", "Diversión", "Compras"]
+  let categorias = ["Comida", "Café", "Museos", "Co-Work", "Pet"]
   let imagenes = ["restaurante", "museo", "balcon", "caballo", "fachada" ]
   
   @IBOutlet weak var collectionView: UICollectionView!
@@ -51,6 +51,14 @@ extension WelcomeViewController : UICollectionViewDelegate, UICollectionViewData
     cell.imagen.image = UIImage(named: imagenes[indexPath.item])
     cell.categoryLabel.text = categorias[indexPath.item]
     return cell
+  }
+
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let service = FoursquareService()
+    let item = categorias[indexPath.item]
+    //Hacemos la llamada al servicio segun la elección del usuario
+    service.request(categoria: item)
   }
   
 }
