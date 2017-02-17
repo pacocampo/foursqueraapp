@@ -10,16 +10,28 @@ import Foundation
 // mis pods
 import Alamofire
 import SwiftyJSON
+import CoreLocation.CLLocation
+
+protocol FoursquareDelegate {
+  var coords : [String] { get set }
+  func showPointInMap(coords : [CLLocationCoordinate2D])
+  func error(message : String, actions : [UIAlertAction])
+}
 
 class FoursquareService {
+  
+  var delegate : FoursquareDelegate?
+  
+  let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+  
   ///funcion para hacer request, recibe un argumento categoria
-  func request(categoria : String) {
+  func request(categoria : String, coords : CLLocationCoordinate2D ) {
     /*Creamos los parametros con el tipo 'Parameters' de alamofire
     estos parametros provienen de la documentación de foursquare */
     let parameters : Parameters = ["v":"20170101",
                                    "client_id" : "4OROBZEIVETX2B15RTAKH1YBGQQBO1MTURTI5HBBBLT4JT4P",
                                    "client_secret":"AMTLJVIBN11RWPTNZPWWTOUKVEVOWFFWIO2DQMHYU5PHHC2K",
-                                   "ll": "19.4142776,-99.1622213",
+                                   "ll": coords.toString(),
                                    "query": categoria,
                                     "radius":"800"]
     ///Hace la llamada al URL indicado y agrega los parametros
@@ -28,20 +40,36 @@ class FoursquareService {
       .validate(statusCode: 200..<300)
       //toma el request y nos envía la respuesta
       .responseJSON { response in
+        
+        var coordList : [CLLocationCoordinate2D] = []
+        
         //Evalua si la respuesta no es exitosa
         if response.result.isFailure {
-          print("aqui la cagamos")
+            self.delegate?.error(message: "Aquí la cagamos", actions: [self.okAction])
         }
         //Convierte la respuesta en json con el framework SwiftyJSON
         let json = JSON(response.result.value)
-        //Accedemos al nivel de 'venues' de la respuesta del api
+        
         let data = json["response"]["venues"]
-        // imprimimos cada nombre del venue si es que existe.
         for (_, value) in data {
-          print(value["name"])
+          let coordinate = CLLocationCoordinate2D(latitude: value["location"]["lat"].double!, longitude: value["location"]["lng"].double!)
+          coordList.append(coordinate)
         }
+        self.delegate?.showPointInMap(coords: coordList)
     }
+
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 

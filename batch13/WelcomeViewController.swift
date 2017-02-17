@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WelcomeViewController: UIViewController {
-
+  
+  var manager : CLLocationManager = CLLocationManager()
+  var categoria : String!
   let categorias = ["Comida", "Café", "Museos", "Co-Work", "Pet"]
   let imagenes = ["restaurante", "museo", "balcon", "caballo", "fachada" ]
   
@@ -18,6 +21,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
       collectionView.delegate = self
       collectionView.dataSource = self
+      locationSettings()
 
         // Do any additional setup after loading the view.
     }
@@ -26,17 +30,25 @@ class WelcomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
+  func locationSettings()  {
+    if CLLocationManager.authorizationStatus() == .notDetermined {
+      self.manager.requestAlwaysAuthorization()
+    }
+    self.manager.startUpdatingLocation()
+  }
     
 
-    /*
+  
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let vc = segue.destination as! MapViewController
+        vc.manager = self.manager
+        vc.categoria = self.categoria
     }
-    */
+  
 
 }
 
@@ -55,10 +67,10 @@ extension WelcomeViewController : UICollectionViewDelegate, UICollectionViewData
 
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let service = FoursquareService()
-    let item = categorias[indexPath.item]
+    self.categoria = categorias[indexPath.item]
     //Hacemos la llamada al servicio segun la elección del usuario
-    service.request(categoria: item)
+      performSegue(withIdentifier: "menuToMap", sender: nil)
   }
+
   
 }

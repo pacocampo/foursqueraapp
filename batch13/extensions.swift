@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation.CLLocation
 
 /// Extensión para esconder teclado en ViewController
 extension UIViewController {
@@ -20,4 +21,10 @@ extension UIViewController {
     view.endEditing(true)
   }
 
+}
+
+extension CLLocationCoordinate2D {
+  func toString() -> String {
+    return "\(self.latitude), \(self.longitude)"
+  }
 }
