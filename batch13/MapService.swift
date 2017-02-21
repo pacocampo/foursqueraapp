@@ -25,9 +25,11 @@ class MapService {
     mapView.setRegion(region, animated: true)
   }
   
-  func addPointInMap(coords : CLLocationCoordinate2D, mapView : MKMapView) {
+  func addPointInMap(place : Place, mapView : MKMapView) {
     let point = MKPointAnnotation()
-    point.coordinate = coords
+    point.title = place.category
+    point.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+    let _ = mapView.annotations
     mapView.addAnnotation(point)
   }
 }
