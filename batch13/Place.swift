@@ -15,20 +15,19 @@ class Place {
   var longitude : Double
 //  var photo     : String?
   var address   : String?
-  var category  : String
+  var category  : String?
   
-  init?(json : JSON) {
+  init(json : JSON) throws {
     guard let name = json["name"].string,
     let latitude = json["location"]["lat"].double,
-    let longitude = json["location"]["lng"].double,
-    let category = json["categories"][0]["name"].string else {
-        return nil
+    let longitude = json["location"]["lng"].double else {
+        throw AppError.Serialization
     }
     self.name = name
     self.latitude = latitude
     self.longitude = longitude
 //    self.photo = json["categories"][0]["icon"]["prefix"].string! + ".png"
     self.address = json["location"]["address"].string
-    self.category = category
+    self.category = json["categories"][0]["name"].string
   }
 }

@@ -14,7 +14,7 @@ class MapViewController: UIViewController {
   
   var manager : CLLocationManager?
   var categoria : String!
-  var categories: Set<String> = []
+  var places: [Place] = []
   var pines : [String : String] = [:]
   var service : MapService?
   var foursquare : FoursquareService!
@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
   var randomNumber : UInt32!
 
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var tableView: UITableView!
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +31,16 @@ class MapViewController: UIViewController {
       foursquare = FoursquareService(categoria: categoria, coords: self.manager!.location!.coordinate)
       foursquare.delegate = self
       foursquare.request()
-//      mapView.delegate = self
+      mapView.delegate = self
+      tableView.dataSource = self
       
-     randomNumber = arc4random_uniform(UInt32(categories.count))
+      let otherCord = CLLocationCoordinate2D(latitude: 19.4158764, longitude: -99.1622857)
+      
+      let result = service?.returnDistance(from: (self.manager?.location?.coordinate)!, to: otherCord, mapView: mapView)
+      print(result)
+      
+      service?.traceRoute(from: self.manager!.location!.coordinate, to: otherCord, mapView: self.mapView)
+    
         // Do any additional setup after loading the view.
     }
 
@@ -55,15 +63,12 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController : FoursquareDelegate {
-  func showPointInMap(places: [Place?]) {
-    
-    for item in places {
-      guard let place = item else {
-        break
-      }
+  func showPointInMap(places: [Place]) {
+    self.places = places
+    for place in places {
       service?.addPointInMap(place : place , mapView: mapView)
     }
-    print(categories)
+    self.tableView.reloadData()
     return
   } 
   
@@ -73,12 +78,31 @@ extension MapViewController : FoursquareDelegate {
   }
 }
 
-//extension MapViewController : MKMapViewDelegate {
-//  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//    
-//    let view = MKAnnotationView(annotation: annotation, reuseIdentifier: "test")
-//    view.annotation = annotation
-//    view.image = UIImage(named: "pin1")
-//    return view
-//  }
-//}
+extension MapViewController : MKMapViewDelegate {
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    let render = MKPolylineRenderer(overlay: overlay)
+    render.strokeColor = UIColor.cyan
+    render.lineWidth = 5.0
+    
+    return render
+  }
+  
+}
+
+extension MapViewController : UITableViewDataSource, UITableViewDelegate {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return self.places.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")! as UITableViewCell //id de storyboard
+    let place = self.places[indexPath.row]
+    cell.textLabel?.text = place.name
+    
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    return
+  }
+}

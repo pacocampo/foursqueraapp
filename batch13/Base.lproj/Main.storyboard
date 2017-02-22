@@ -160,24 +160,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="l4v-lp-KSE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="323"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="323" id="rrU-3c-CZh"/>
+                                </constraints>
                             </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AdG-w4-POl">
+                                <rect key="frame" x="0.0" y="317" width="375" height="350"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="74" id="XUj-n1-aux">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="74"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XUj-n1-aux" id="V4G-Q2-XrV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="YHW-zz-F0D" firstAttribute="top" secondItem="AdG-w4-POl" secondAttribute="bottom" id="2ni-WB-h7j"/>
                             <constraint firstItem="l4v-lp-KSE" firstAttribute="leading" secondItem="Pqa-qz-aBc" secondAttribute="leading" id="3sz-yM-tKA"/>
-                            <constraint firstItem="YHW-zz-F0D" firstAttribute="top" secondItem="l4v-lp-KSE" secondAttribute="bottom" id="8dK-RV-HTo"/>
                             <constraint firstAttribute="trailing" secondItem="l4v-lp-KSE" secondAttribute="trailing" id="F3e-CZ-KsT"/>
+                            <constraint firstItem="AdG-w4-POl" firstAttribute="leading" secondItem="l4v-lp-KSE" secondAttribute="leading" id="KQH-gL-yLi"/>
+                            <constraint firstItem="AdG-w4-POl" firstAttribute="trailing" secondItem="l4v-lp-KSE" secondAttribute="trailing" id="W0X-Mn-EJr"/>
                             <constraint firstItem="l4v-lp-KSE" firstAttribute="top" secondItem="Pqa-qz-aBc" secondAttribute="top" id="itX-iK-yUf"/>
+                            <constraint firstItem="AdG-w4-POl" firstAttribute="top" secondItem="l4v-lp-KSE" secondAttribute="bottom" constant="-6" id="xSd-ks-wmz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="l4v-lp-KSE" id="jxI-Hn-ZeJ"/>
+                        <outlet property="tableView" destination="AdG-w4-POl" id="QDu-Pj-7Rj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6T-D0-miw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="1489"/>
+            <point key="canvasLocation" x="1760.8" y="1488.305847076462"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h65-VH-hu0">

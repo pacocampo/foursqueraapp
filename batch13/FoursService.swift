@@ -17,9 +17,8 @@ enum Endpoints : String {
 }
 
 protocol FoursquareDelegate {
-  var coords : [String] { get set }
-  var categories : Set<String> {get set}
-  func showPointInMap(places : [Place?])
+  var places : [Place] { get set }
+  func showPointInMap(places : [Place])
   func error(message : String, actions : [UIAlertAction])
 }
 
@@ -62,17 +61,17 @@ class FoursquareService {
         let json = JSON(response.result.value)
         
         let data = json["response"]["venues"]
-        var places : [Place?] = []
-        var categories : Set<String> = []
+        var places : [Place] = []
+      
         for (_, value) in data {
-          let place = Place(json:value)
-          if place != nil {
-           categories.insert(place!.category)
+          do {
+            let place = try Place(json:value)
+            places.append(place)
+          } catch let error {
+            self.delegate?.error(message: error.localizedDescription, actions: [self.okAction])
           }
-          places.append(place)
         }
         self.delegate?.showPointInMap(places: places)
-        self.delegate?.categories = categories
     }
 
   }
