@@ -10,6 +10,7 @@
 		347CDDAB26D5EDF17C8F37A0 /* Pods_batch13.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50FF28E59D365F89E6D5AA42 /* Pods_batch13.framework */; };
 		554CD0C71E53F24C00C78A15 /* FoursService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554CD0C61E53F24C00C78A15 /* FoursService.swift */; };
 		554DC5791E5D21BE00759D92 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DC5781E5D21BE00759D92 /* Errors.swift */; };
+		554DC57B1E5FC48800759D92 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DC57A1E5FC48800759D92 /* UserService.swift */; };
 		558FF9D91E568FE7002279E3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558FF9D81E568FE7002279E3 /* MapViewController.swift */; };
 		558FF9DB1E5697D9002279E3 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558FF9DA1E5697D9002279E3 /* MapService.swift */; };
 		55B8BF371E529A510015D7EE /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B8BF361E529A510015D7EE /* extensions.swift */; };
@@ -47,6 +48,7 @@
 		50FF28E59D365F89E6D5AA42 /* Pods_batch13.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_batch13.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		554CD0C61E53F24C00C78A15 /* FoursService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursService.swift; sourceTree = "<group>"; };
 		554DC5781E5D21BE00759D92 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		554DC57A1E5FC48800759D92 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		558FF9D81E568FE7002279E3 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		558FF9DA1E5697D9002279E3 /* MapService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		55B8BF361E529A510015D7EE /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				554CD0C61E53F24C00C78A15 /* FoursService.swift */,
 				558FF9DA1E5697D9002279E3 /* MapService.swift */,
+				554DC57A1E5FC48800759D92 /* UserService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				554CD0C71E53F24C00C78A15 /* FoursService.swift in Sources */,
 				55B8BF371E529A510015D7EE /* extensions.swift in Sources */,
 				554DC5791E5D21BE00759D92 /* Errors.swift in Sources */,
+				554DC57B1E5FC48800759D92 /* UserService.swift in Sources */,
 				558FF9D91E568FE7002279E3 /* MapViewController.swift in Sources */,
 				558FF9DB1E5697D9002279E3 /* MapService.swift in Sources */,
 				55EDE5A81E5BCFF4004D1EA3 /* Place.swift in Sources */,

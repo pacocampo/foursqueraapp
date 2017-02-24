@@ -16,6 +16,11 @@ class WelcomeViewController: UIViewController {
   let categorias = ["Comida", "Café", "Museos", "Co-Work", "Pet"]
   let imagenes = ["restaurante", "museo", "balcon", "caballo", "fachada" ]
   
+  @IBAction func closeAction(_ sender: Any) {
+    UserService.endSession()
+    _ = self.navigationController?.popToRootViewController(animated: true)
+  }
+  
   @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()

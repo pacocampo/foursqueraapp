@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="ARs-3y-UHZ">
             <objects>
-                <viewController id="Z0M-Rh-Elh" customClass="ViewController" customModule="batch13" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginController" id="Z0M-Rh-Elh" customClass="ViewController" customModule="batch13" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lUd-be-ISx"/>
                         <viewControllerLayoutGuide type="bottom" id="REB-bW-kZa"/>
@@ -91,7 +91,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8C8-9s-vT3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="577"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="2" id="epH-Cj-yyY">
@@ -134,6 +134,14 @@
                                     <outlet property="delegate" destination="NEV-3E-Bvh" id="w7O-d1-NxK"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4T-F5-oPa">
+                                <rect key="frame" x="81" y="600" width="223" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cerrar Sesión"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="NEV-3E-Bvh" eventType="touchUpInside" id="orE-KN-3gK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -145,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAA-cH-Hef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="815"/>
+            <point key="canvasLocation" x="1760.8" y="814.54272863568224"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="56E-aC-i6R">
@@ -173,7 +181,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XUj-n1-aux" id="V4G-Q2-XrV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -203,7 +211,7 @@
         <!--Navigation Controller-->
         <scene sceneID="h65-VH-hu0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5fd-OZ-ot7" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5fd-OZ-ot7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gjj-q4-tDF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

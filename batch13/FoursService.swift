@@ -11,6 +11,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreLocation.CLLocation
+import UserNotifications
 
 enum Endpoints : String {
   case getPlaces = "https://api.foursquare.com/v2/venues/search"
@@ -38,7 +39,7 @@ class FoursquareService {
     self.parameters = ["v": version, "client_id" : clientId ,"client_secret": clientSecret, "ll": coords.toString(), "query": categoria, "radius":radius]
     
   }
-  
+
   
   var delegate : FoursquareDelegate?
   

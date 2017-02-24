@@ -20,6 +20,9 @@ class ViewController: UIViewController {
       }
     }
     if valid {
+      //guardo logueado en user defaults
+      let user = UserService()
+      user.storeCredentials()
       // creamos una instancia del view controller a navegar
       let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
       // lo presentamos
