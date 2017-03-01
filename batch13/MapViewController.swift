@@ -20,6 +20,8 @@ class MapViewController: UIViewController {
   var foursquare : FoursquareService!
   var coords: [String] = []
   var randomNumber : UInt32!
+  //para notification center
+  let notificationCenter = NotificationCenter.default
 
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var tableView: UITableView!
@@ -41,13 +43,29 @@ class MapViewController: UIViewController {
       
       service?.traceRoute(from: self.manager!.location!.coordinate, to: otherCord, mapView: self.mapView)
     
-        // Do any additional setup after loading the view.
+       //para notification agrego un observer para escuchar la notificación
+      notificationCenter.addObserver(self, selector: #selector(self.showPointInMapByNotification(notification:)), name: NSNotification.Name(rawValue: "showPoints"), object: nil)
     }
 
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    //quitar notification al salir del view
+    notificationCenter.removeObserver(self, name: NSNotification.Name(rawValue: "showPoints"), object: nil)
+  }
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
+  func showPointInMapByNotification(notification : Notification) {
+    self.places = notification.userInfo?["places"] as! [Place]
+    for place in places {
+      service?.addPointInMap(place : place , mapView: mapView)
+    }
+    self.tableView.reloadData()
+    return
+  }
     
 
     /*

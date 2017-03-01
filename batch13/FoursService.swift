@@ -17,13 +17,19 @@ enum Endpoints : String {
   case getPlaces = "https://api.foursquare.com/v2/venues/search"
 }
 
+//con protocolos
 protocol FoursquareDelegate {
   var places : [Place] { get set }
   func showPointInMap(places : [Place])
   func error(message : String, actions : [UIAlertAction])
 }
 
+//con notification center
+
+
 class FoursquareService {
+  
+  let notificationCenter = NotificationCenter.default
   
   let version = "20170101"
   let clientId = "4OROBZEIVETX2B15RTAKH1YBGQQBO1MTURTI5HBBBLT4JT4P"
@@ -72,7 +78,11 @@ class FoursquareService {
             self.delegate?.error(message: error.localizedDescription, actions: [self.okAction])
           }
         }
-        self.delegate?.showPointInMap(places: places)
+        //con protocolo
+        //self.delegate?.showPointInMap(places: places)
+        
+        //con notification
+        self.notificationCenter.post(name: NSNotification.Name(rawValue: "showPoints"), object: self, userInfo: ["places" : places])
     }
 
   }
