@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 class UserService {
   
@@ -34,6 +35,23 @@ class UserService {
     UserDefaults.standard.removePersistentDomain(forName: appDomain)
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginController") as! ViewController
     UIApplication.shared.keyWindow?.rootViewController = vc
+  }
+  
+  class func sendNotification() {
+    let content = UNMutableNotificationContent()
+    content.title = "Evento"
+    content.body = "Ya acabamos!!!!"
+    content.sound = UNNotificationSound.default()
+    content.userInfo = ["data": "1235"]
+    
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+    let notification = UNNotificationRequest(identifier: "push", content: content, trigger: trigger)
+    
+    
+    let center = UNUserNotificationCenter.current()
+    center.add(notification) { (error) in
+      NSLog("\(error?.localizedDescription)")
+    }
   }
 }
 

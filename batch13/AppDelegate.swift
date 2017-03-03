@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let user = UserService()
     if user.userIsLogged() {
       self.goToMain()
+    }
+    
+    //Notifications Settings
+    UNUserNotificationCenter.current().delegate = self
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+      if granted {
+        UIApplication.shared.registerForRemoteNotifications()
+      } else {
+        let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+        if UIApplication.shared.canOpenURL(settingsUrl!) {
+          UIApplication.shared.open(settingsUrl!)
+        }
+      }
+      NSLog("El permiso fue \(granted)")
     }
     
     return true
@@ -50,9 +65,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NavigationController")
     window?.rootViewController = vc
   }
-  
-  
 
+}
 
+extension AppDelegate : UNUserNotificationCenterDelegate {
+  //cuando la app no está activa
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    print(response.notification.request.content.userInfo)
+  }
+  
+  //cuando la app está activa
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    print(notification.request.content.userInfo)
+  }
 }
 

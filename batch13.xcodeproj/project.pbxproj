@@ -275,6 +275,11 @@
 					55D562941E442D8C005E9240 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					55D562A81E442D8C005E9240 = {
 						CreatedOnToolsVersion = 8.2.1;
